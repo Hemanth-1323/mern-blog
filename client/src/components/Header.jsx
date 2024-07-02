@@ -1,3 +1,152 @@
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
+import { FaMoon } from "react-icons/fa";
+
+export default function Header() {
+  const path = useLocation().pathname;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  return (
+    <header className="border-b-2 flex justify-between items-center px-4 py-3 relative">
+      <Link
+        to="/"
+        className="flex items-center space-x-2 text-xl font-semibold dark:text-white"
+      >
+        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
+          Hemanths
+        </span>
+        <span>Blog</span>
+      </Link>
+
+      <div className="hidden sm:flex lg:flex lg:items-center lg:space-x-4 flex-1 ml-4">
+        <Link
+          to="/"
+          className={`block px-3 py-2 rounded-lg ${
+            path === "/"
+              ? "bg-gray-100 text-gray-900"
+              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          }`}
+        >
+          Home
+        </Link>
+        <Link
+          to="/about"
+          className={`block px-3 py-2 rounded-lg ${
+            path === "/about"
+              ? "bg-gray-100 text-gray-900"
+              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          }`}
+        >
+          About
+        </Link>
+        <Link
+          to="/projects"
+          className={`block px-3 py-2 rounded-lg ${
+            path === "/projects"
+              ? "bg-gray-100 text-gray-900"
+              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          }`}
+        >
+          Projects
+        </Link>
+      </div>
+
+      <form className="flex-1 hidden lg:block">
+        <div className="relative w-3/4">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full px-3 py-1.5 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+          <AiOutlineSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        </div>
+      </form>
+
+      <div className="flex items-center space-x-4 ml-auto hidden sm:flex">
+        <button className="w-12 h-10 flex items-center justify-center bg-gray-200 rounded-full">
+          <FaMoon className="text-gray-600" />
+        </button>
+        <Link to="/sign-in">
+          <button className="px-4 py-2 rounded-lg bg-orange-400 text-gray-800">
+            Sign In
+          </button>
+        </Link>
+      </div>
+
+      <button
+        className="sm:hidden w-12 h-10 flex items-center justify-center bg-gray-200 rounded-full"
+        onClick={handleMobileMenuToggle}
+      >
+        <svg
+          className="w-6 h-6 text-gray-700"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          {isMobileMenuOpen ? (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          ) : (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          )}
+        </svg>
+      </button>
+
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg mt-1 sm:hidden">
+          <div className="flex flex-col space-y-2 py-2">
+            <Link
+              to="/"
+              className={`block px-4 py-2 rounded-lg ${
+                path === "/"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`block px-4 py-2 rounded-lg ${
+                path === "/about"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              About
+            </Link>
+            <Link
+              to="/projects"
+              className={`block px-4 py-2 rounded-lg ${
+                path === "/projects"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              Projects
+            </Link>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
 /* import { Button, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -290,152 +439,3 @@ export default function Header() {
   );
 }
  */
-
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
-
-export default function Header() {
-  const path = useLocation().pathname;
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleMobileMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  return (
-    <header className="border-b-2 flex justify-between items-center px-4 py-3 relative">
-      <Link
-        to="/"
-        className="flex items-center space-x-2 text-xl font-semibold dark:text-white"
-      >
-        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-          Hemanth's
-        </span>
-        <span>Blog</span>
-      </Link>
-
-      <div className="hidden sm:flex lg:flex lg:items-center lg:space-x-4 flex-1 ml-4">
-        <Link
-          to="/"
-          className={`block px-3 py-2 rounded-lg ${
-            path === "/"
-              ? "bg-gray-100 text-gray-900"
-              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          }`}
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          className={`block px-3 py-2 rounded-lg ${
-            path === "/about"
-              ? "bg-gray-100 text-gray-900"
-              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          }`}
-        >
-          About
-        </Link>
-        <Link
-          to="/projects"
-          className={`block px-3 py-2 rounded-lg ${
-            path === "/projects"
-              ? "bg-gray-100 text-gray-900"
-              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          }`}
-        >
-          Projects
-        </Link>
-      </div>
-
-      <form className="flex-1 hidden lg:block">
-        <div className="relative w-3/4">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full px-3 py-1.5 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-          />
-          <AiOutlineSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-        </div>
-      </form>
-
-      <div className="flex items-center space-x-4 ml-auto hidden sm:flex">
-        <button className="w-12 h-10 flex items-center justify-center bg-gray-200 rounded-full">
-          <FaMoon className="text-gray-600" />
-        </button>
-        <Link to="/sign-in">
-          <button className="px-4 py-2 rounded-lg bg-blue-400 text-gray-800">
-            Sign In
-          </button>
-        </Link>
-      </div>
-
-      <button
-        className="sm:hidden w-12 h-10 flex items-center justify-center bg-gray-200 rounded-full"
-        onClick={handleMobileMenuToggle}
-      >
-        <svg
-          className="w-6 h-6 text-gray-700"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          {isMobileMenuOpen ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          )}
-        </svg>
-      </button>
-
-      {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg mt-1 sm:hidden">
-          <div className="flex flex-col space-y-2 py-2">
-            <Link
-              to="/"
-              className={`block px-4 py-2 rounded-lg ${
-                path === "/"
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className={`block px-4 py-2 rounded-lg ${
-                path === "/about"
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              About
-            </Link>
-            <Link
-              to="/projects"
-              className={`block px-4 py-2 rounded-lg ${
-                path === "/projects"
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              Projects
-            </Link>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-}
